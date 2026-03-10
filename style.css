@@ -1,3 +1,4 @@
+
 :root {
      --bg: #fdfbff;
      --fg: #2a1a3a;
@@ -1064,3 +1065,138 @@ footer {
      }
 
 }
+
+.modal-backdrop {
+     position: fixed;
+     inset: 0;
+     z-index: 999;
+     background: rgba(0, 0, 0, 0.7);
+     backdrop-filter: blur(6px);
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     padding: 24px;
+     opacity: 0;
+     pointer-events: none;
+     transition: opacity 0.3s ease;
+}
+
+.modal-backdrop.open {
+     opacity: 1;
+     pointer-events: all;
+}
+
+.modal-box {
+     background: var(--card);
+     border: 1px solid var(--card-border);
+     border-radius: 20px;
+     max-width: 500px;
+     width: 100%;
+     max-height: 90vh;
+     overflow-y: auto;
+     position: relative;
+     transform: translateY(32px) scale(0.97);
+     transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+     box-shadow: 0 32px 80px rgba(0, 0, 0, 0.35);
+}
+
+.modal-backdrop.open .modal-box {
+     transform: translateY(0) scale(1);
+}
+
+.modal-close {
+     position: absolute;
+     top: 14px;
+     right: 14px;
+     width: 36px;
+     height: 36px;
+     border-radius: 50%;
+     background: var(--secondary);
+     border: none;
+     color: var(--fg);
+     font-size: 1rem;
+     cursor: pointer;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     z-index: 10;
+     transition: background var(--transition), transform 0.15s ease;
+}
+
+.modal-close:hover {
+     background: var(--accent);
+     transform: scale(1.1) rotate(90deg);
+}
+
+.modal-img-wrap {
+     width: 100%;
+     height: 280px;
+     overflow: hidden;
+     border-radius: 20px 20px 0 0;
+     background: var(--secondary);
+}
+
+.modal-img-wrap img {
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+}
+
+.modal-body {
+     padding: 28px;
+}
+
+.modal-body h2 {
+     font-size: 1.5rem;
+     margin-bottom: 12px;
+     color: var(--fg);
+}
+
+.modal-body p {
+     font-size: 0.95rem;
+     color: var(--muted);
+     line-height: 1.75;
+     margin-bottom: 18px;
+}
+
+.modal-actions {
+     display: flex;
+     gap: 12px;
+     flex-wrap: wrap;
+     margin-top: 20px;
+}
+
+.btn-outline {
+     background: transparent;
+     color: var(--fg);
+     border: 2px solid var(--card-border);
+}
+
+.btn-outline:hover {
+     background: var(--secondary);
+     border-color: var(--fg);
+}
+
+.modal-btn {
+     flex: 1;
+     justify-content: center;
+     min-width: 130px;
+}
+
+.modal-btn.hidden {
+     display: none;
+}
+
+body.modal-open {
+     overflow: hidden;
+}
+
+.project-card {
+     cursor: pointer;
+}
+
+@media (max-width: 640px) {
+     .modal-img-wrap { height: 200px; }
+     .modal-body { padding: 20px; }
+}
+

@@ -91,3 +91,61 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
      });
 });
 
+
+const modal = document.getElementById('project-modal');
+const modalImg = document.getElementById('modal-img');
+const modalTitle = document.getElementById('modal-title');
+const modalDesc = document.getElementById('modal-desc');
+const modalTags = document.getElementById('modal-tags');
+const modalLive = document.getElementById('modal-live');
+const modalGithub = document.getElementById('modal-github');
+const modalClose = document.getElementById('modal-close');
+
+function openModal(card) {
+     const img = card.querySelector('.project-img img')?.src || '';
+     const title = card.querySelector('.project-body h3')?.textContent || '';
+     const desc = card.querySelector('.project-body p')?.textContent || '';
+     const tags = card.querySelector('.project-tags')?.innerHTML || '';
+
+     const liveBtn = card.querySelector('.overlay-btn[aria-label="Live demo"]');
+     const githubBtn = card.querySelector('.overlay-btn[aria-label="GitHub"]');
+
+     modalImg.src = img;
+     modalImg.alt = title;
+     modalTitle.textContent = title;
+     modalDesc.textContent = desc;
+     modalTags.innerHTML = tags;
+
+     if (liveBtn) {
+          modalLive.href = liveBtn.href;
+          modalLive.classList.remove('hidden');
+     } else {
+          modalLive.classList.add('hidden');
+     }
+
+     if (githubBtn) {
+          modalGithub.href = githubBtn.href;
+          modalGithub.classList.remove('hidden');
+     } else {
+          modalGithub.classList.add('hidden');
+     }
+
+     modal.classList.add('open');
+     document.body.classList.add('modal-open');
+}
+
+function closeModal() {
+     modal.classList.remove('open');
+     document.body.classList.remove('modal-open');
+}
+
+document.querySelectorAll('.project-card').forEach(card => {
+     card.addEventListener('click', (e) => {
+          if (e.target.closest('.overlay-btn')) return;
+          openModal(card);
+     });
+});
+
+modalClose.addEventListener('click', closeModal);
+modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
