@@ -216,7 +216,7 @@ html.dark #navbar {
 .nav-links a {
      padding: 8px 14px;
      border-radius: 8px;
-     font-size: 0.9rem;
+     font-size: 1.05rem;
      font-weight: 500;
      color: var(--muted);
      transition: color var(--transition), background var(--transition);
